@@ -9,6 +9,12 @@ public:
 	Vec2& operator+=(const Vec2& rhs);// Vec2&
 	Vec2 operator*(float rhs);
 	Vec2& operator*=(float rhs);
+	Vec2 operator-(const Vec2 rhs)const;
+	Vec2& operator-=(const Vec2& rhs);
+	float GetLength() const;
+	float GetLengthSq() const;
+	Vec2& Normalize() ;
+	Vec2 GetNormailzed() ;
 public:
 	float x;
 	float y;
