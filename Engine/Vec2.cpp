@@ -20,7 +20,7 @@ Vec2& Vec2::operator+=(const Vec2& rhs)
 	//return *this;// * pointer: reference to ourself
 }
 
-Vec2 Vec2::operator*(float rhs)
+Vec2 Vec2::operator*(float rhs) const
 {
 
 	return Vec2(x * rhs, y * rhs);
@@ -56,7 +56,7 @@ Vec2& Vec2::Normalize()
 	return *this = GetNormailzed();
 }
 
-Vec2 Vec2::GetNormailzed()
+Vec2 Vec2::GetNormailzed() const
 {
 	const float len = GetLength();
 	if (len == 0.0f)
