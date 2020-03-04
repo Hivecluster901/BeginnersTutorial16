@@ -59,7 +59,7 @@ Vec2& Vec2::Normalize()
 Vec2 Vec2::GetNormailzed() const
 {
 	const float len = GetLength();
-	if (len == 0.0f)
+	if (len != 0.0f)
 	{
 		return *this * (1.0f / len);
 	}

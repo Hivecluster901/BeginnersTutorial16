@@ -367,7 +367,6 @@ void Dude::Update( const Keyboard & kbd,float dt )
 		vel.y = -1.0f;
 	}
 	pos += vel.GetNormailzed() * speed * dt;
-	vel = { 0, 0 };
 
 }
 
