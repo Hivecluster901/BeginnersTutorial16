@@ -347,24 +347,41 @@ void Dude::Draw( Graphics& gfx ) const
 	gfx.PutPixel( 12 + x_int,19 + y_int,0,0,0 );
 }
 
-void Dude::Update( const Keyboard & kbd,float dt )
+void Dude::Update(const Keyboard& kbd,  Mouse& mouse, float dt)
 {
-	if( kbd.KeyIsPressed( VK_RIGHT ) )
+	if (kbd.KeyIsPressed(VK_RIGHT))
 	{
-		pos.x += speed * dt;
+		direction += { 1, 0 };
 	}
-	if( kbd.KeyIsPressed( VK_LEFT ) )
+	if (kbd.KeyIsPressed(VK_LEFT))
 	{
-		pos.x -= speed * dt;
+		direction += { -1, 0 };
 	}
-	if( kbd.KeyIsPressed( VK_DOWN ) )
+	if (kbd.KeyIsPressed(VK_DOWN))
 	{
-		pos.y += speed * dt;
+		direction += { 0, 1 };
 	}
-	if( kbd.KeyIsPressed( VK_UP ) )
+	if (kbd.KeyIsPressed(VK_UP))
 	{
-		pos.y -= speed * dt;
+		direction += { 0, -1 };
 	}
+	pos += direction.GetNormalized() * speed * dt;
+	direction = { 0, 0 };
+	while (!mouse.IsEmpty())
+	{
+		const Mouse::Event e = mouse.Read();
+		if (e.GetType() == Mouse::Event::Type::LPress)
+		{
+			mouseisClicked = !mouseisClicked;
+		}
+	}
+	if (mouseisClicked)
+	{
+		Vec2 MousePos = { (float)mouse.GetPosX(), (float)mouse.GetPosY() };
+
+		pos += (MousePos - pos).GetNormalized() * speed * dt;
+	}
+
 }
 
 Vec2 Dude::GetPos() const
